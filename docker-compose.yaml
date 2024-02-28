@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: app-go
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - mongo
+      - redis
+  mysql:
+    image: mysql:8.0
+    container_name: app-mysql
+    environment:
+      MYSQL_DATABASE: platform
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+  mongo:
+    image: mongo:latest
+    container_name: app-mongo
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:latest
+    container_name: app-redis 
+    ports:
+      - "6379:6379"
